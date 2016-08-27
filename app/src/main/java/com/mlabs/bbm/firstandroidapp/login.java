@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,14 +39,14 @@ public class login extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     Toast.makeText(getBaseContext(), "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();
-
                 }
-
             }
         });
         Show.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionevent) {
+
+                final int cursor = Password.getSelectionStart();
 
                 int event = motionevent.getAction();
 
@@ -58,18 +59,18 @@ public class login extends AppCompatActivity {
 
                 switch (motionevent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
+                        Log.d("login","ACTION_DOWN");
                         Password.setTransformationMethod(null);
                         break;
 
                     case MotionEvent.ACTION_UP:
+                        Log.d("login","ACTION_UP");
                         Password.setTransformationMethod(new PasswordTransformationMethod());
                         break;
                 }
                 return true;
-
             }
         });
-
     }
     protected  void onPause(){
         super.onPause();
