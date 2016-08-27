@@ -61,11 +61,13 @@ public class login extends AppCompatActivity {
                     case MotionEvent.ACTION_DOWN:
                         Log.d("login","ACTION_DOWN");
                         Password.setTransformationMethod(null);
+                        Password.setSelection(cursor);
                         break;
 
                     case MotionEvent.ACTION_UP:
                         Log.d("login","ACTION_UP");
                         Password.setTransformationMethod(new PasswordTransformationMethod());
+                        Password.setSelection(cursor);
                         break;
                 }
                 return true;
