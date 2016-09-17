@@ -34,14 +34,16 @@ public class login extends AppCompatActivity {
         LogIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (Pattern.compile("^\\w+.*\\w*@[a-zA-Z_]+?\\.[0-9a-zA-Z]{2,}$").matcher(Email.getText()).matches() && Password.length() >= 8) {
-                    Intent intent = new Intent(login.this, MainActivity.class);
+               // if (Pattern.compile("^\\w+.*\\w*@[a-zA-Z_]+?\\.[0-9a-zA-Z]{2,}$").matcher(Email.getText()).matches() && Password.length() >= 8)
+                if (Email.getText().toString().equals("admin") && Password.getText().toString().equals("test")){
+                    Intent intent = new Intent(login.this, OnTouchActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getBaseContext(), "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
-        });
+        }
+        );
         Show.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionevent) {
@@ -52,6 +54,7 @@ public class login extends AppCompatActivity {
 
                 // if (event == motionevent.ACTION_DOWN) {
                 //    Password.setTransformationMethod(null);
+
                 //}
                 //  if (event == motionevent.ACTION_UP) {
                 //    Password.setTransformationMethod(new PasswordTransformationMethod());

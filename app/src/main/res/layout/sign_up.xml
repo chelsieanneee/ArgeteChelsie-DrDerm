@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/accent_material_dark">
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/TvNewEmail"
+        android:layout_marginTop="84dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="E-mail"
+        android:textSize="20dp" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/TvNewPass"
+        android:hint="Password"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/TvNewEmail"
+        android:layout_alignLeft="@+id/TvNewEmail"
+        android:layout_alignStart="@+id/TvNewEmail" />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:id="@+id/TvConfirmNewPass"
+        android:hint="Confirm Password"
+        android:layout_marginTop="41dp"
+        android:layout_below="@+id/TvNewPass"
+        android:layout_alignLeft="@+id/TvNewPass"
+        android:layout_alignStart="@+id/TvNewPass" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Create Account "
+        android:id="@+id/BtnCreate"
+        android:layout_below="@+id/TvConfirmNewPass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:background="@color/accent_material_light"
+        android:textSize="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/abc_primary_text_disable_only_material_dark" />
+
+    <TextView
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:text="Sign Up"
+        android:id="@+id/TvTitle"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/foreground_material_dark"
+        android:textSize="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

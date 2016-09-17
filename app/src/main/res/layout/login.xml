@@ -66,4 +66,16 @@
         android:layout_alignEnd="@+id/tfEmail"
         android:background="@drawable/eyeicon"
         android:layout_alignBottom="@+id/tfPassword" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:id="@+id/TvSignUp"
+        android:textSize="20dp"
+        android:textColor="@color/abc_search_url_text_normal"
+        android:layout_marginBottom="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center" />
 </RelativeLayout>
