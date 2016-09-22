@@ -11,6 +11,8 @@ import android.widget.EditText;
 import android.view.View;
 import android.view.View.OnClickListener;
 import java.util.regex.Pattern;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -22,6 +24,8 @@ public class login extends AppCompatActivity {
     EditText Password;
     Button LogIn;
     Button Show;
+    TextView SignUp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,19 +35,28 @@ public class login extends AppCompatActivity {
         Password = (EditText) findViewById(R.id.tfPassword);
         LogIn = (Button) findViewById(R.id.btLogIn);
         Show = (Button) findViewById(R.id.btShowpass);
+        SignUp = (TextView) findViewById(R.id.TvSignUp);
+
         LogIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-               // if (Pattern.compile("^\\w+.*\\w*@[a-zA-Z_]+?\\.[0-9a-zA-Z]{2,}$").matcher(Email.getText()).matches() && Password.length() >= 8)
-                if (Email.getText().toString().equals("admin") && Password.getText().toString().equals("test")){
-                    Intent intent = new Intent(login.this, OnTouchActivity.class);
-                    startActivity(intent);
+                if (Pattern.compile("^\\w+.*\\w*@[a-zA-Z_]+?\\.[0-9a-zA-Z]{2,}$").matcher(Email.getText()).matches() && Password.length() >= 8){
+                    AccountRepo repo = new AccountRepo(getApplicationContext());
+                    boolean res = false;
+                    res = repo.validateLogin(Email.getText().toString(), Password.getText().toString());
+                    if(res == true){
+                        Intent intent = new Intent(login.this, MainActivity.class);
+                        startActivity(intent);}
+                    else  {
+                        Toast.makeText(getBaseContext(), "Account does not exist.",Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(getBaseContext(), "Email or Password is Incorrect", Toast.LENGTH_SHORT).show();
                 }
             }
         }
         );
+
         Show.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionevent) {
@@ -76,6 +89,18 @@ public class login extends AppCompatActivity {
                 return true;
             }
         });
+
+        SignUp.setOnClickListener(new OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+
+                                          Intent intent = new Intent(login.this, SignUp.class);
+                                          startActivity(intent);
+                                      }
+
+
+                                  }
+        );
     }
     protected  void onPause(){
         super.onPause();

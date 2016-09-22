@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.HashMap;
+
 /**
  * Created by androidstudio on 17/09/16.
  */
@@ -55,19 +57,28 @@ public class AccountRepo {
     public boolean validateLogin(String email, String password){
 
         boolean res = false;
+        HashMap<String, String> user = new HashMap<String, String>();
+
+        String selectQuery = "SELECT " + Account.KEY_email + ", " + Account.KEY_password + " FROM " + Account.TABLE + " WHERE " + Account.KEY_email + " = \"" + email.toString() + "\" AND " + Account.KEY_password + " = \"" + password.toString() +"\"";
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor cursor = db.query(Account.TABLE, new String [] {Account.KEY_email, Account.KEY_password}, Account.KEY_ID + "=?",
-                new String[] {email, password}, null, null, null, null);
-
-        if (cursor!=null){
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
+        if(cursor.getCount()>0){
+            user.put(Account.KEY_email, cursor.getString(0));
+            user.put(Account.KEY_password, cursor.getString(1));
             res = true;
-        }else
+        }
+        else
         {
             res = false;
         }
+        cursor.close();
+        db.close();
+
 
         return res;
+
 
     }
     public boolean checkAccount (Account acct){
