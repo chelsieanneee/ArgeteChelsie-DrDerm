@@ -5,53 +5,91 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Created by androidstudio on 03/09/16.
- */
 public class OnTouchActivity extends AppCompatActivity {
+
+    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_on_touch);
+        image = (ImageView)findViewById(R.id.imageView);
 
-        final ImageView imgView = (ImageView) findViewById(R.id.imageView3);
-        final String TAG = OnTouchActivity.class.getSimpleName();
+        final TextView tv1 = (TextView) findViewById(R.id.textview1);
+        final TextView tv2 = (TextView) findViewById(R.id.textview2);
+        final TextView tv3 = (TextView) findViewById(R.id.textview3);
+        final TextView tv4 = (TextView) findViewById(R.id.textview4);
+        final TextView tv5 = (TextView) findViewById(R.id.textview5);
+        final TextView tv6 = (TextView) findViewById(R.id.textview6);
 
-        imgView.setOnTouchListener(new View.OnTouchListener() {
-            float initialX, initialY, finalX, finalY;
-
+        image.setOnTouchListener(new View.OnTouchListener() {
+            float x,y,x1,y1;
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                int event = motionEvent.getAction();
-                switch (event) {
+            public boolean onTouch(View v, MotionEvent e) {
+
+                String actionX = "", actionY = "";
+                String quadrant = "";
+
+                switch (e.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        initialX = motionEvent.getX();
-                        initialY = motionEvent.getY();
-                        Toast.makeText(getApplicationContext(), "value of X : " + initialX + "value of Y : " + initialY, Toast.LENGTH_SHORT).show();
+                        x = e.getX();
+                        y = e.getY();
                         return true;
                     case MotionEvent.ACTION_UP:
-                        finalX = motionEvent.getX();
-                        finalY = motionEvent.getY();
-                        if (finalX > initialX) {
-                            Toast.makeText(getApplicationContext(), "SWIPED RIGHT", Toast.LENGTH_SHORT).show();
-                        }
-                        if (finalX < initialX) {
-                            Toast.makeText(getApplicationContext(), "SWIPED LEFT", Toast.LENGTH_SHORT).show();
+                        float X = image.getRight()/2;
+                        float Y = image.getBottom()/2;
 
+                        x1=e.getX();
+                        y1=e.getY();
+
+                        actionX = "";
+                        actionY = "";
+                        quadrant = "";
+
+                        if (x<x1){
+                            actionX = "Swiped right. ";
                         }
-                        if (finalY > initialY) {
-                            Toast.makeText(getApplicationContext(), "SWIPED DOWN", Toast.LENGTH_SHORT).show();
+                        if (x>x1){
+                            actionX = "Swiped left. ";
                         }
-                        if (finalX > initialX) {
-                            Toast.makeText(getApplicationContext(), "SWIPED UP", Toast.LENGTH_SHORT).show();
+                        if (y<y1){
+                            actionY = "Swiped down. ";
                         }
-                        return true;
+                        if (y>y1)
+                        {
+                            actionY = "Swiped up. ";
+                        }
+
+                        if(x1>X && y1>Y){
+                            quadrant = "Quadrant 4";
+                        }
+                        if(x1<X && y1>Y){
+                            quadrant = "Quadrant 3";
+                        }
+                        if(x1<X && y1<Y){
+                            quadrant = "Quadrant 2";
+                        }
+                        if(x1>X && y1<Y){
+                            quadrant = "Quadrant 1";
+                        }
+
+                        tv1.setText("X1, X2: " + x + ", " + x1);
+                        tv2.setText("Y1, Y2: " + y + ", " + y1);
+                        tv3.setText("X1-X2: " + (Math.abs(x1-x)));
+                        tv4.setText("Y1-Y2:" + (Math.abs(y1-y)));
+                        tv5.setText("ACTION: " + actionX + actionY);
+                        tv6.setText("QUADRANT: " + quadrant );
+
                 }
-                        return true;
+                return  false;
             }
+
         });
+
+
     }
+
 }

@@ -16,4 +16,14 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="On Touch"
+        android:id="@+id/BtnOnTuch"
+        android:layout_below="@+id/TvWelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="81dp"
+        android:textSize="20dp" />
+
 </RelativeLayout>
